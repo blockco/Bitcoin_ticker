@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, Picker } from 'react-native';
+import { AppRegistry, Text, View, Picker, StyleSheet } from 'react-native';
 
 class Greeting extends Component {
     render() {
@@ -10,6 +10,8 @@ class Greeting extends Component {
 }
 
 export default class LotsOfGreetings extends Component {
+
+
     state = {coin: "default12", gotcoins: true, doneloading: false, cindex: 0, coinupdated: false};
     getcoins()
     {
@@ -52,11 +54,14 @@ export default class LotsOfGreetings extends Component {
         // const pickedcoin = this.state.coins.filter(function(obj) { return obj.name === this.state.coin})
         if (this.state.doneloading && this.state.cindex > 0) {
             return(
-                <View>
+                <View style={{height: 100, padding: 20,justifyContent: 'center', alignItems: 'center',}}>
                     <Text>{this.state.coins[this.state.cindex - 1].name}</Text>
                     <Text>{this.state.coins[this.state.cindex - 1].price_btc}</Text>
                     <Text>{this.state.coins[this.state.cindex - 1].price_usd}</Text>
                     <Text>{this.state.coins[this.state.cindex - 1].id}</Text>
+                    <Text>{this.state.coins[this.state.cindex - 1].percent_change_7d}</Text>
+                    <Text>{this.state.coins[this.state.cindex - 1].percent_change_24h}</Text>
+                    <Text>{this.state.coins[this.state.cindex - 1].percent_change_1h}</Text>
                 </View>
             )
         }
@@ -67,7 +72,7 @@ export default class LotsOfGreetings extends Component {
             this.getcoins();
             this.setState({gotcoins: false})
         }
-
+        // this.updatecoin();
         return (
             <View>
             <Picker
@@ -82,5 +87,18 @@ export default class LotsOfGreetings extends Component {
     }
 }
 
+const styles = StyleSheet.create({
+    bigblue: {
+        color: 'blue',
+        fontWeight: 'bold',
+        fontSize: 30,
+    },
+    red: {
+        color: 'red',
+    },
+    green: {
+        color: 'green',
+    },
+});
+
 // skip this line if using Create React Native App
-AppRegistry.registerComponent('AwesomeProject', () => LotsOfGreetings);
